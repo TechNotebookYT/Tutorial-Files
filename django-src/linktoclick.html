@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<center>
+    <h1>Current Meeting: <i><b>{{ obj.meeting_name }}</b></i></h1>
+    <h2>Start Time: {{ obj.start_time }}</h2>
+    <h2>End Time: {{ obj.end_time }}</h2>
+</center>
+<div class="jumbotron">
+    <center>
+        <a href="{{ obj.meeting_link }}"><button type="button" class="btn btn-dark">Link to Join: <b>{{ obj.meeting_name
+                    }}</b></button></a>
+    </center>
+</div>
+
+
+{% endblock content %}
