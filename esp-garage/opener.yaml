@@ -28,7 +28,7 @@ wifi:
 
 captive_portal:
 
-# If you have a door sensore, use the below binary sensor section. If not, follow the instructions below
+# If you have a door sensor, use the below binary sensor section. If not. don't add this section and follow the instructions below
 binary_sensor:
   - platform: homeassistant
     name: "Zigbee Garage Door Sensor"
