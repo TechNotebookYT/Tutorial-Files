@@ -1,0 +1,85 @@
+esphome:
+  name: garage-door-opener
+  friendly_name: garage door opener
+
+esp8266:
+  board: nodemcuv2
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "key here"
+
+ota:
+  - platform: esphome
+    password: "pw here"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Garage-Door-Opener"
+    password: "pw here"
+
+captive_portal:
+
+# If you have a door sensore, use the below binary sensor section. If not, follow the instructions below
+binary_sensor:
+  - platform: homeassistant
+    name: "Zigbee Garage Door Sensor"
+    entity_id: binary_sensor.garage_door_sensor_opening
+    id: zigbee_garage_door_sensor
+# end
+
+switch:
+  - platform: gpio
+    pin: D7
+    name: "Garage Door Button"
+    id: garage_door_button
+
+# only use this if you DO have a door sensor
+cover:
+  - platform: template
+    name: "Garage Door"
+    device_class: garage
+    lambda: |-
+      if (id(zigbee_garage_door_sensor).state) {
+        return COVER_OPEN;
+      } else {
+        return COVER_CLOSED;
+      }
+    open_action:
+      - switch.turn_off: garage_door_button
+      - switch.turn_on: garage_door_button
+      - delay: 0.1s
+      - switch.turn_off: garage_door_button
+    close_action:
+      - switch.turn_off: garage_door_button
+      - switch.turn_on: garage_door_button
+      - delay: 0.1s
+      - switch.turn_off: garage_door_button
+    optimistic: false
+
+# end
+
+# if you DON'T have a door sensor, use the below code
+cover:
+  - platform: template
+    name: "Garage Door"
+    device_class: garage
+    open_action:
+      - switch.turn_off: garage_door_button
+      - switch.turn_on: garage_door_button
+      - delay: 0.1s
+      - switch.turn_off: garage_door_button
+    close_action:
+      - switch.turn_off: garage_door_button
+      - switch.turn_on: garage_door_button
+      - delay: 0.1s
+      - switch.turn_off: garage_door_button
+    optimistic: true
