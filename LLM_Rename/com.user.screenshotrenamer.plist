@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.USERNAME.screenshotrenamer</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/USERNAME/Utilities/screenshot-renamer/.venv/bin/python</string>
+        <string>/Users/USERNAME/Utilities/screenshot-renamer/watcher.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/USERNAME/Utilities/screenshot-renamer/</string>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/USERNAME/Utilities/screenshot-renamer/watcher.out.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/USERNAME/Utilities/screenshot-renamer/watcher.err.log</string>
+</dict>
+</plist>
