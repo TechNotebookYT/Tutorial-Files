@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.USERNAME.screenshotrenamer</string>
+    <string>com.technotebook.screenshotrenamer</string>
 
     <key>ProgramArguments</key>
     <array>
