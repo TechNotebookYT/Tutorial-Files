@@ -72,6 +72,17 @@ class ScreenshotHandler(FileSystemEventHandler):
         time.sleep(SETTLE_SECONDS)  # let the file finish writing
         process(event.src_path)
 
+    def on_moved(self, event):
+        # macOS's native screenshot tool writes to a hidden temp file first,
+        # then atomically renames it to the final "Screenshot ....png" name.
+        # That shows up as a move/rename event, not a create event.
+        if event.is_directory:
+            return
+        if not event.dest_path.lower().endswith(".png"):
+            return
+        time.sleep(SETTLE_SECONDS)  # let the file finish writing
+        process(event.dest_path)
+
 
 def main():
     if not os.path.isdir(WATCH_DIR):
